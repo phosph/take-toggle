@@ -1,9 +1,9 @@
 {
   "name": "@jashitory/take-toggle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rxjs take-toggle operator",
   "scripts": {
-    "build": "tsc -p ./tsconfig.json"
+    "build": "tsc -p ./tsconfig.json && downlevel-dts . dist/ts4 --to=4 && mv dist/ts4/dist/take-toggle.d.ts dist/take-toggle.v4.d.ts && rm -r dist/ts4"
   },
   "keywords": [
     "rxjs",
@@ -14,6 +14,7 @@
   "author": "Jesus Figueredo <jafigueredo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "downlevel-dts": "^0.11.0",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
@@ -28,7 +29,15 @@
   "exports": {
     ".": {
       "default": "./dist/take-toggle.js",
-      "types": "./dist/take-toggle.d.ts"
+      "types": "./dist/take-toggle.d.ts",
+      "types@<4.5": "./dist/take-toggle.v4.d.ts"
+    }
+  },
+  "typesVersions": {
+    "<4.5": {
+      "dist/take-toggle.d.ts": [
+        "./dist/take-toggle.v4.d.ts"
+      ]
     }
   }
 }
