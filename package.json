@@ -1,0 +1,34 @@
+{
+  "name": "@jashitory/take-toggle",
+  "version": "1.0.0",
+  "description": "Rxjs take-toggle operator",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json"
+  },
+  "keywords": [
+    "rxjs",
+    "operator",
+    "take",
+    "toggle"
+  ],
+  "author": "Jesus Figueredo <jafigueredo@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "rxjs": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:phosph/take-toggle"
+  },
+  "main": "./dist/take-toggle.js",
+  "types": "./dist/take-toggle.d.ts",
+  "exports": {
+    ".": {
+      "default": "./dist/take-toggle.js",
+      "types": "./dist/take-toggle.d.ts"
+    }
+  }
+}

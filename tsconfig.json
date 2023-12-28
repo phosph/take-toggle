@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "ESNext",
+    "module": "ES2022",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "moduleResolution": "Bundler",
+    "outDir": "dist",
+    "lib": [
+      "es2023",
+    ],
+  },
+  "include": ["./take-toggle.ts"]
+}
