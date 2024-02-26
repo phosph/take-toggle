@@ -1,6 +1,6 @@
 {
   "name": "@jashitory/take-toggle",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Rxjs take-toggle operator",
   "scripts": {
     "build": "tsc -p ./tsconfig.json && downlevel-dts . dist/ts4 --to=4 && mv dist/ts4/dist/take-toggle.d.ts dist/take-toggle.v4.d.ts && rm -r dist/ts4"

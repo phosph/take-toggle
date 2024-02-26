@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, type MonoTypeOperatorFunction } from "rxjs";
+import { BehaviorSubject, Observable, noop, type MonoTypeOperatorFunction } from "rxjs";
 
 export interface TakeToggleOptions {
   /**
@@ -13,6 +13,12 @@ export interface TakeToggleOptions {
     @default true
    */
   emitInitialState?: boolean;
+
+  /**
+   * store the observer when the Notifier completes
+   * @default: true
+   */
+  closeOnNotifierCompletes?: boolean
 }
 
 /**
@@ -63,7 +69,8 @@ export function takeToggle<T>(notifier: Observable<boolean> | BehaviorSubject<bo
 
   const {
     emitLastValue = true,
-    emitInitialState = notifier instanceof BehaviorSubject ? notifier.value : true
+    emitInitialState = notifier instanceof BehaviorSubject ? notifier.value : true,
+    closeOnNotifierCompletes = true,
   } = options;
 
   return (observable) => new Observable(observer => {
@@ -86,11 +93,19 @@ export function takeToggle<T>(notifier: Observable<boolean> | BehaviorSubject<bo
     })
 
     subscription.add(
-      notifier.subscribe((_emit) => {
-        if (emit !== _emit) {
-          emit = _emit;
-          if (emit && firstTick && emitLastValue) observer.next(value)
-        }
+      notifier.subscribe({
+        next: (_emit) => {
+          if (emit !== _emit) {
+            emit = _emit;
+            if (emit && firstTick && emitLastValue) observer.next(value)
+          }
+        },
+        complete: closeOnNotifierCompletes
+          ? () => {
+              subscription.unsubscribe();
+              observer.complete();
+            }
+          : noop
       })
     );
 
